@@ -10,59 +10,77 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-md-6 pinGenerate">
+            <div class="col-md-6 pinGenerator">
                 <div class="pin-generator half-width">
                     <input id="display" class="form-control" type="text">
-                    <button id="generate-btn" class="generate-btn">Generate Pin</button>
+                    <button id="generate-btn" onclick=" randomNumber('pinNumber',false);"  class="generate-btn">Generate Pin</button>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="input-section half-width">
-                    <input class="form-control" type="text">
+                    <input id="secondDisplay" class="form-control" type="text">
                     <div class="numbers">
                         <div class="calc-body">
                             <div class="calc-button-row">
-                              <div class="button">7</div>
-                              <div class="button">8</div>
-                              <div class="button">9</div>
+                              <div class="button" value="7" onclick="secondDisplay.value += '7'">7</div>
+                              <div class="button" value="8" onclick="secondDisplay.value += '8'">8</div>
+                              <div class="button" value="9" onclick="secondDisplay.value += '9'">9</div>
                             </div>
                             <div class="calc-button-row">
-                              <div class="button">4</div>
-                              <div class="button">5</div>
-                              <div class="button">6</div>
+                              <div class="button" value="4" onclick="secondDisplay.value += '4'">4</div>
+                              <div class="button" value="5" onclick="secondDisplay.value += '5'">5</div>
+                              <div class="button" value="6" onclick="secondDisplay.value += '6'">6</div>
                             </div>
                             <div class="calc-button-row">
-                              <div class="button">1</div>
-                              <div class="button">2</div>
-                              <div class="button">3</div>
+                              <div class="button" value="1" onclick="secondDisplay.value += '1'">1</div>
+                              <div class="button" value="2" onclick="secondDisplay.value += '2'">2</div>
+                              <div class="button" value="3" onclick="secondDisplay.value += '3'">3</div>
                             </div>
                             <div class="calc-button-row">
-                                <div class="button"><</div>
-                                <div class="button">0</div>
-                                <div class="button">C</div>
+                                <div class="button" value="<" onclick="secondDisplay.value = secondDisplay.value.slice(0,-1)"><</div>
+                                <div class="button" value="0" onclick="secondDisplay.value += '0'">0</div>
+                                <div class="button" value="C" onclick="secondDisplay.value = '' ">C</div>
                             </div>
                             <div>
-                                <button type="submit" class="submit-btn">Submit</button>
+                                <button id="submit-button" type="submit" class="submit-btn">Submit</button>
                                 <p class="action-left">3 try left</p>
                             </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="notify-section">
+        <div class="notify-section" id="notify-section">
             <p class="notify">❌ Pin Didn't Match, Please try again</p>
-            <p class="notify">✅ Pin Matched... Secret door is opening for you</p>
+             <p class="notify">✅ Pin Matched... Secret door is opening for you</p>
         </div>
     </div>
     <script>
-        //generate pin button event handler
-        document.getElementById('generate-btn').addEventListener('click',function(){
-              for(let i = 0; i <= 0; i++){             
-                  const randomNum = Math.random() * 10000;
-                  const generateNum = Math.round(randomNum);
-                  console.log(generateNum);
-              }          
-        })
+
+        //Generate random number
+        function randomNumber(){
+            const pinNumber = Math.floor(1000 + Math.random() * 9000);
+            document.getElementById('display').value = pinNumber;
+            document.getElementById('generate-btn').disabled = false;
+        }
+
+        //submit button
+         document.getElementById('submit-button').addEventListener('click',function(){
+            const submitButton = document.getElementById('submit-button');
+            submitButton.style.display = "none";
+
+            if(display == secondDisplay){
+                console.log("✅ Pin Matched... Secret door is opening for you"); 
+            }
+            else{
+                console.log("❌ Pin Didn't Match, Please try again");
+            }
+
+            const notifySection = document.getElementById('notify-section');
+            notifySection.style.display = 'block';
+         })
+
+
+
     </script>
 </body>
 </html>
